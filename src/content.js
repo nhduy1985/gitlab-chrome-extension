@@ -39,7 +39,8 @@ var likipe_liktime_crs_display = function() {
     //else
     //If comments is not being loaded, then load it
     if(link.item(0).parentNode.classList.contains("inactive") === true) {
-        link.item(0).click();
+        //link.item(0).click();
+        link.item(0).dispatchEvent("click");
     }
     //Hide all event-item
     var items = document.querySelectorAll(".event-item");
@@ -59,3 +60,48 @@ var likipe_liktime_crs_display = function() {
     }
     return;
 };
+
+document.querySelectorAll(".content_list").item(0).addEventListener("DOMNodeInserted", function (ev) {
+    var displayType = "display-only";
+    chrome.storage.local.get('likipe_gitlab_cr_displayed', function (result) {
+        displayType = result.likipe_gitlab_cr_displayed;
+    });
+    var link = document.querySelectorAll("#comments_event_filter");
+    if (link.length === 0) {
+        return;
+    }
+    //else
+    //If comments is not being loaded, then load it
+    if(link.item(0).parentNode.classList.contains("inactive") === true) {
+        link.item(0).click();
+    }
+    //High light event-item
+    var items = document.querySelectorAll(".event-item .md");
+    console.log(displayType);
+    for (var i = 0; i < items.length; i++) {
+        var item = items[i];
+        if (item.innerHTML.match(/CR/) !== null ) {
+            //go upper to the 'event-item'
+            if (displayType === "highlight") {
+                item.parentNode.parentNode.parentNode.style.background = "#FFFF00";
+            }
+            else {
+                if (displayType === "display-only") {
+                    item.parentNode.parentNode.parentNode.style.display = "block";
+                }
+            }
+        }
+        else {
+            //go upper to the 'event-item'
+            if (displayType === "highlight") {
+                //Do nothing
+            }
+            else {
+                if (displayType === "display-only") {
+                    item.parentNode.parentNode.parentNode.style.display = "none";
+                }
+            }
+        }
+    }
+    return;
+}, false);
