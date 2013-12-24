@@ -10,7 +10,6 @@ chrome.extension.onMessage.addListener(function(message, sender, sendResponse) {
 });
 
 var likipe_liktime_crs_hightlight = function(options) {
-    console.log(options);
     var link = document.querySelectorAll("#comments_event_filter");
     if (link.length === 0) {
         return;
