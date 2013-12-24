@@ -6,4 +6,7 @@ window.onload = function() {
     document.getElementById("display-crs").onclick = function() {
         chrome.extension.sendMessage({type: "likipe_liktime_displayCrs"});
     };
+    document.getElementById("settings").onclick = function() {
+		chrome.extension.sendMessage({type: "likipe_liktime_settings"});
+    };
 };

@@ -1,15 +1,16 @@
 chrome.extension.onMessage.addListener(function(message, sender, sendResponse) {
     switch(message.type) {
         case "likipe_liktime_highlightCrs":
-            likipe_liktime_crs_hightlight();
+            likipe_liktime_crs_hightlight(message.options);
             break;
         case "likipe_liktime_displayCrs":
-            likipe_liktime_crs_display();
+            likipe_liktime_crs_display(message.options);
         break;
     }
 });
 
-var likipe_liktime_crs_hightlight = function() {
+var likipe_liktime_crs_hightlight = function(options) {
+    console.log(options);
     var link = document.querySelectorAll("#comments_event_filter");
     if (link.length === 0) {
         return;
@@ -25,13 +26,13 @@ var likipe_liktime_crs_hightlight = function() {
         var item = items[i];
         if (item.innerHTML.match(/CR/) !== null ) {
             //go upper to the 'event-item'
-            item.parentNode.parentNode.parentNode.style.background = "#FFFF00";
+            item.parentNode.parentNode.parentNode.style.background = options.highlight_color;
         }
     }
     return;
 };
 
-var likipe_liktime_crs_display = function() {
+var likipe_liktime_crs_display = function(options) {
     var link = document.querySelectorAll("#comments_event_filter");
     if (link.length === 0) {
         return;
@@ -59,3 +60,4 @@ var likipe_liktime_crs_display = function() {
     }
     return;
 };
+
