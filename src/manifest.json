@@ -17,9 +17,8 @@
 	},
 	"content_scripts": [
 	    {
-	        //"matches": ["http://lab.likipe.se/*", "https://lab.likipe.se/*"],
-	        "matches": ["http://*/*", "https://*/*"],
-	        "js": ["js/content.js"]
+	        "matches": ["http://lab.likipe.se/*", "https://lab.likipe.se/*"],
+	        "js": ["js/content/code_review.js"]
 	    }
 	],
 	"options_page": "options.html",

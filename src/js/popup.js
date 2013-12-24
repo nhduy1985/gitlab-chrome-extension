@@ -7,6 +7,14 @@ window.onload = function() {
         chrome.extension.sendMessage({type: "likipe_liktime_displayCrs"});
     };
     document.getElementById("settings").onclick = function() {
-		chrome.extension.sendMessage({type: "likipe_liktime_settings"});
+		var optionsUrl = chrome.extension.getURL('options.html');
+
+		chrome.tabs.query({url: optionsUrl}, function(tabs) {
+		if (tabs.length) {
+			chrome.tabs.update(tabs[0].id, {active: true});
+		} else {
+			chrome.tabs.create({url: optionsUrl});
+		}
+		});
     };
 };

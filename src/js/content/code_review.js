@@ -60,3 +60,15 @@ var likipe_liktime_crs_display = function(options) {
     return;
 };
 
+
+var likipe_liktime_crs_done_button_added = function() {
+    var replyButtons = document.querySelectorAll(".reply-btn");
+    for (var i = 0; i < replyButtons.length; i++) {
+        var button = replyButtons[i];
+        var doneButton = document.createElement('a');
+        doneButton.className = "btn reply-btn js-discussion-reply-button";
+        doneButton.innerHTML = '<i class="icon-star"></i> Done CR';
+        button.parentNode.insertBefore(doneButton,button);
+    }
+};
+likipe_liktime_crs_done_button_added();
