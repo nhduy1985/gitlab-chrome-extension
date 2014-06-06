@@ -39,7 +39,7 @@ var likipe_liktime_crs_display = function() {
     //else
     //If comments is not being loaded, then load it
     if(link.item(0).parentNode.classList.contains("inactive") === true) {
-        link.item(0).click();
+        link.item(0).dispatchEvent("click");
     }
     //Hide all event-item
     var items = document.querySelectorAll(".event-item");
